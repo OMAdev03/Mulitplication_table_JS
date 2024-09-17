@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+          
+            padding: 20px;
+        }
+
+        input, select, button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        input[type="number"] {
+            width: 150px;
+        }
+
+        select {
+            width: 180px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 100%;
+            background-color: rebeccapurple;
+            color: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: rgb(176, 98, 255);
+        }
+    </style>
+  </head>
+  <body>
+    <input type="number" placeholder="enter a number" id="firstNumber" />
+    <input type="number" placeholder="enter a number" id="secondNumber" />
+
+    <select id="operation">
+      <option value="multiply">Multiply</option>
+      <option value="add">Add</option>
+      <option value="subtract">Subtract</option>
+      <option value="divide">Divide</option>
+    </select>
+
+    <button onclick="good()">Generate table</button>
+
+    <table id="display"></table>
+    <script>
+      function good() {
+        var firstNumber = document.getElementById("firstNumber").value;
+        var secondNumber = document.getElementById("secondNumber").value;
+        var realNumberOne = Number(firstNumber);
+        var realNumberTwo = Number(secondNumber);
+        const table = document.getElementById("display");
+        const operation = document.getElementById("operation").value;
+
+        if(firstNumber == ""  && secondNumber == ""){
+            table.innerHTML = `<p style="text-align:center;">Please input a number</p>`
+        }else{
+            table.innerHTML = "";
+
+for (let i = realNumberOne; i <= 12; i++) {
+  let row = `<tr>`;
+  for (let j = realNumberTwo; j <= 12; j++) {
+    console.log(i, j);
+    if (operation == "multiply") {
+      row += `<td>${i} X ${j} = ${i * j}</td>`;
+    } else if (operation == "add") {
+      row += `<td>${i} + ${j} = ${i + j}</td>`;
+    } else if (operation == "subtract") {
+      row += `<td>${i} - ${j} = ${i - j}</td>`;
+    } else if (operation == "divide") {
+      if (j == 0) {
+        row += `<td>${i} / ${j} = infinity</td>`;
+      } else {
+        let result = i/j
+        row += `<td>${i} / ${j} = ${result.toFixed(2)}</td>`;
+      }
+    }
+  }
+  row += "</tr>";
+  table.innerHTML += row;
+}
+        }
+
+      
+      }
+    </script>
+  </body>
+</html>
